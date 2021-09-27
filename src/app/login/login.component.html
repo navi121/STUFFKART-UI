@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Login!</title>
+  <link rel="stylesheet" href="../login/login.component.css">
+</head>
+
+<body>
+  <img src="../pickawood-gf8e6XvG_3E-unsplash.jpg" class="img">
+ 
+  <div class="center">
+    <h1>Login</h1>
+    <form  method="post" class="col s12 white" #log="ngForm" (ngSubmit)="OnSubmit(log)">
+      <div class="txt_field">
+        <input class="validate" type="text" name="Email" #Email="ngModel" [(ngModel)]="login.Email" minlength="3" required>
+        <span></span>
+        <label>Email</label>
+      </div>
+      <div class="txt_field">
+        <input type="password" class="validate" type="password" name="Password" #Password="ngModel"
+          [(ngModel)]="login.Password" required minlength="3">
+        <span></span>
+        <label>Password</label>
+      </div>
+      <div class="pass" routerLink="/forget">Forgot Password?</div>
+      <div *ngIf="errorMessage" style="color: red;">
+        Please enter valid Email or Password
+    </div>
+      <input type="submit" value="Login">
+      <div class="signup_link">
+        Not a member? <a routerLink="/signup">Signup</a><br /><a routerLink="/home" (click)="onclick()">Continue Without
+          Signing-Up</a>
+        <br /><a routerLink="/admin">Seller Login</a>
+      </div>
+
+    </form>
+    <!-- <div *ngIf="!check.valid && check.hasError('required', ['name'])"
+     class="error">Form name is required.</div> -->
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,138 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<body>
+    <div class="card">
+        <div class="card-top border-bottom text-center">
+            <a class="nav-link active" routerLink="/home" aria-current="page" href="#" (click)="clear()">Back to
+                shop</a>
+            <span id="logo">PAYMENT</span>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-7">
+                    <form method="post" #OrderDetailsForm="ngForm" (ngSubmit)="OnSubmit(OrderDetailsForm)">
+                        <div class="left border">
+                            <span>Name:</span>
+                            <input type="text" name="name" placeholder="Enter Your Name" #name="ngModel"
+                                [(ngModel)]="order.name" required minlength="3">
+                            <span>Mobile Number:</span>
+                            <input placeholder="Enter 10 Digit Number" name="mobileNumber" #mobileNumber="ngModel"
+                                [(ngModel)]="order.mobileNumber" required>
+                            <span>Shipping Address:</span>
+                            <input placeholder="Address" type="textarea" name="address" #address="ngModel"
+                                [(ngModel)]="order.address" required>
+                            <div class="row">
+                                <div class="col-4"><span>Country:</span>
+                                    <input placeholder="Country" name="country" #country="ngModel"
+                                        [(ngModel)]="order.country">
+                                </div>
+                                <div class="col-4"><span>State:</span> <input placeholder="State" name="state"
+                                        #state="ngModel" [(ngModel)]="order.state"> </div>
+                                <div class="col-4"><span>Zipcode:</span> <input placeholder="Zipcode" name="zipCode"
+                                        #zipCode="ngModel" [(ngModel)]="order.zipCode"> </div>
+
+                            </div>
+
+
+                            <span style="font-size: 15px;">PAYMENT TYPE:</span>
+
+                            <select id="payment" (change)="onChange($event)">
+                                <option value="COD">CASH ON DELIVERY</option>
+                                <option value="CARD">CARD</option>
+                            </select>
+                        </div>
+                        <input type="submit" value="Place Order">
+                    </form>
+                    <br>
+
+                </div>
+
+                <div class="col-md-5">
+                    <div>
+                        <div class="right border">
+                            <div class="header">Order Summary</div>
+                            <div class="row item" *ngFor="let getCart of cartService.items">
+                                <div class="col-4 align-self-center">
+
+                                    <img class="img-fluid" src="{{'data:image/jpg;base64,' +getCart.image}}">
+                                </div>
+                                <div class="col-6">
+                                    <div class="row">
+                                        <h6><b>Price:${{getCart.price}}</b></h6>
+                                        <h6>Size:{{getCart.size}}</h6>
+                                    </div>
+                                    <div class="row text-muted"><b>{{getCart.productName}}</b></div>
+                                    <br>
+
+                                </div>
+                                <div class="col-2">
+                                    <button (click)="clear()"><i style="color: rgb(194, 25, 25);" class="fa fa-trash"
+                                            aria-hidden="true"></i>
+                                    </button>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-5">
+                                        <h6><b>Quantity:</b></h6>
+                                    </div>
+                                    <div class="col-2">
+                                        <button><i class="fa fa-plus" (click)="plus(getCart)"></i></button>
+                                    </div>
+                                    <div class="col-2">
+                                        <input type="text" style="width: 30px;height: 25px;" class="form-control"
+                                            value={{getCart.quantity}} readonly>
+                                    </div>
+                                    <div class="col-2">
+                                        <button><i class="fa fa-minus" (click)="minus(getCart)"></i></button>
+                                    </div>
+
+                                </div>
+                                <span>Total: </span>
+                                <input type="text" class="form-control" value={{getCart.total}} readonly>
+
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row lower">
+                            <div class="col text-left">Subtotal</div>
+                            <div class="col text-right">
+                                <div class="col text-right"><b>{{cartService.cartTotal}}</b></div>
+                            </div>
+                        </div>
+                        <div class="row lower">
+                            <div class="col text-left">Delivery</div>
+                            <div class="col text-right">Free</div>
+                        </div>
+                        <div class="row lower">
+                            <div class="col text-left"><b>Total to pay</b></div>
+                            <div class="col text-right"><b>{{cartService.cartTotal}}</b></div>
+                        </div>
+
+                        <p class="text-muted text-center">Complimentary Shipping & Returns</p>
+                    </div>
+                </div>
+                <div class="col-md-7" *ngIf="card">
+                    <div class="left border">
+                        <div class="row"> <span class="header">Payment</span>
+                            <div class="icons"> <img src="https://img.icons8.com/color/48/000000/visa.png" /> <img
+                                    src="https://img.icons8.com/color/48/000000/mastercard-logo.png" /> <img
+                                    src="https://img.icons8.com/color/48/000000/maestro.png" /> </div>
+                        </div>
+                        <form> <span>Cardholder's name:</span> <input placeholder="Nessie"> <span>Card
+                                Number:</span>
+                            <input placeholder="0125 6780 4567 9909">
+                            <div class="row">
+                                <div class="col-4"><span>Expiry date:</span> <input placeholder="YY/MM"> </div>
+                                <div class="col-4"><span>CVV:</span> <input id="cvv"> </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <div> </div>
+    </div>
+</body>

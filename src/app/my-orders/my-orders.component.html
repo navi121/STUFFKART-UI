@@ -1,0 +1,27 @@
+<h2 class="th">My Orders</h2>
+<div class="container">
+    <table class="table table-bordered table-striped">
+        <tr class="th">
+            <th>Name</th>
+            <th>ProductName</th>
+            <th>ProductDescription</th>
+            <th>Price</th>
+            <th>Size</th>
+            <th>Quantity</th>
+            <th>Quantity Price</th>
+            <th>Address</th>
+        </tr>
+        <tbody>
+            <tr class="cart-item" *ngFor="let getCart of cartService.orderDetail; let i=index">
+                <td>{{getCart.name}}</td>
+                <td>{{getCart.productName}}</td>
+                <td>{{getCart.productDescription}}</td>
+                <td>{{getCart.price}}</td>
+                <td>{{getCart.size}}</td>
+                <td>{{getCart.quantity}}</td>
+                <td>{{getCart.total}}</td>
+                <td>{{getCart.address}}<br>{{getCart.state}},{{getCart.country}}<br>{{getCart.mobileNumber}},{{getCart.zipCode}}
+                </td>
+        </tbody>
+    </table>
+</div>

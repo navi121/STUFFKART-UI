@@ -1,0 +1,92 @@
+<html>
+<head>
+  <title>Signup!</title>
+  <link rel="stylesheet" href="../sign-up/sign-up.component.css">
+</head>
+
+<body>
+  <img src="../pickawood-gf8e6XvG_3E-unsplash.jpg" class="img">
+  <div class="center">
+    <h1>Signup</h1>
+    <form method="post" class="col s12 white" #userRegistrationForm="ngForm"
+      (ngSubmit)="OnSubmit(userRegistrationForm)">
+      <div class="txt_field">
+        <input class="validate" type="text" name="FirstName" #FirstName="ngModel" [(ngModel)]="user.FirstName" required
+          minlength="3">
+        <span></span>
+        <label>FirstName</label>
+      </div>
+      <div class="txt_field">
+        <input class="validate" type="text" name="LastName" #LastName="ngModel" [(ngModel)]="user.LastName" required
+          minlength="1">
+        <span></span>
+        <label>LastName</label>
+      </div>
+      <div class="txt_field">
+        <input class="validate" type="text" name="Email" #Email="ngModel" [(ngModel)]="user.Email"
+          pattern="^[a-z0-9._%+-]+@[a-z.-]+\.[a-z]{3}$" required>
+          <div *ngIf="Email.invalid && (Email.dirty || Email.touched)"
+        class="alert">
+        <div *ngIf="Email.errors?.required" class="text-danger">
+          Email is required.
+        </div>
+        <div *ngIf="Email.errors?.pattern" class="text-danger">
+          Email Invalid.
+        </div>
+      </div>
+        <label>Email</label>
+      </div>
+      <div class="txt_field">
+        <input type="password" class="validate" type="password" name="Password" #Password="ngModel"
+          [(ngModel)]="user.Password" required minlength="3">
+        <span></span>
+        <div *ngIf="Password.invalid && (Password.dirty || Password.touched)"
+        class="alert">
+        <div *ngIf="Password.errors?.required" class="text-danger">
+          password is required.
+        </div>
+        <div *ngIf="Password.errors?.minlength" class="text-danger">
+          password must be at least 6 characters long.
+        </div>
+      </div>
+        <label>Password</label>
+      </div>
+      <div class="txt_field">
+        <input class="validate" type="text" name="MobileNumber" #MobileNumber="ngModel" [(ngModel)]="user.MobileNumber"
+          required minlength="10" maxlength="10" pattern="[0-9 ]*">
+        <span></span>
+        <div *ngIf="MobileNumber.invalid && (MobileNumber.dirty || MobileNumber.touched)"
+        class="alert">
+        <div *ngIf="MobileNumber.errors?.required" class="text-danger">
+          MobileNumber is required.
+        </div>
+        <div *ngIf="MobileNumber.errors?.pattern" class="text-danger">
+          MobileNumber Must be Number.
+        </div>
+        <div *ngIf="MobileNumber.errors?.minlength" class="text-danger">
+          MobileNumber Should be 10 Numbers
+        </div>
+      </div>
+        <label>MobileNumber</label>
+      </div>
+      <select class="form-select" aria-label="Default select example" name="SecurityQuestion" #SecurityQuestion="ngModel" [(ngModel)]="user.SecurityQuestion">
+        <option value="Which City You Have Born?">Which City You Have Born?</option>
+         <option value="What is your First Mobile?">What is your First Mobile?</option>
+         <option value="What is Your First Pet Name?">What is Your First Pet Name?</option>
+       </select>
+       <div class="txt_field">
+         <input class="validate" type="text" name="SecurityAnswer" #SecurityAnswer="ngModel" [(ngModel)]="user.SecurityAnswer"
+           required minlength="3">
+         <span></span>
+         <label>Type Your Answer : Remember your Answer</label>
+       </div>
+      <input type="submit" value="Signup" href="../home-page/home-page.component.html">
+      <div class="signup_link">
+        Already a member? <a routerLink="/login">SignIn</a><br /><a routerLink="/home">Skip</a>
+      </div>
+    </form>
+  </div>
+
+</body>
+
+</html>

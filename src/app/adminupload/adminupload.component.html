@@ -1,0 +1,74 @@
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>AddProducts</title>
+  <link rel="stylesheet" href="../adminupload/adminupload.component.css">
+</head>
+
+<body>
+  <img src="../pickawood-gf8e6XvG_3E-unsplash.jpg" class="img">
+  <div class="center">
+    <h1>Add Product</h1>
+    <form method="post" class="col s12 white" #userRegistrationForm="ngForm"
+      (ngSubmit)="OnSubmit(userRegistrationForm)">
+      <div class="txt_field">
+        <input class="validate" type="text" name="productName" #ProductName="ngModel" [(ngModel)]="additem.productName"
+          required minlength="3">
+        <span></span>
+        <label>ProductName</label>
+      </div>
+      <!-- <div class="txt_field">
+        <input  class="validate" type="text"  required  minlength="1">
+        <span></span>
+        <label>Category</label>
+      </div> -->
+      Select Category
+      <select class="form-select" aria-label="Default select example" name="category" #Category="ngModel"
+        [(ngModel)]="additem.category">
+
+        <option value="Men">Men</option>
+        <option value="Women">Women</option>
+        <option value="Kid">Kid</option>
+      </select>
+      <div class="txt_field">
+        <input class="validate" type="text" name="productDescription" #ProductDescription="ngModel"
+          [(ngModel)]="additem.productDescription" required minlength="1">
+        <span></span>
+        <label>ProductDescription</label>
+      </div>
+      <div class="txt_field">
+        <input class="validate" type="number" name="price" #Price="ngModel" [(ngModel)]="additem.price" required
+          minlength="3">
+        <span></span>
+        <label>Price INR</label>
+      </div>
+      <div class="txt_field">
+        <input type="validate" class="validate" type="text" name="size" #Size="ngModel" [(ngModel)]="additem.size"
+          required minlength="1">
+        <span></span>
+        <label>Size</label>
+      </div>
+      <!-- <div class="txt_field">
+        <input type="file" class="validate" type="text" name="image" #Image="ngModel" [(ngModel)]="additem.image" required  minlength="3">
+        <span></span>
+        <label>Image</label>
+      </div> -->
+      <!-- <div>
+        <input type="hidden" #Quantity="ngModel" [(ngModel)]="additem.quantity" value="1">
+      </div> -->
+      <div class="">
+        <input type="file" #Image accept="image/*" (change)="imgUpload($event)">
+        <span></span>
+      </div>
+      <div class="signup_link">
+        <a href=""></a>
+      </div>
+      <input type="submit" value="AddProduct" href="../home-page/home-page.component.html"><br>
+      <div class="signup_link">
+        <a routerLink="/home">Home</a>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

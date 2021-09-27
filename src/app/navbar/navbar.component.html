@@ -1,0 +1,48 @@
+<link rel="stylesheet" href="../navbar/navbar.component.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid" style="background-color: rgba(136, 133, 133, 0.281);">
+    <h3 >STUFFKART</h3>
+    <div class="d-flex input-group w-auto">
+      <input type="text" class="form-control" [(ngModel)]="searchText" placeholder="Search" >
+      <button type="submit" (click)="search()"><i class="fa fa-search" aria-hidden="true"></i></button>
+    </div>
+    <div class="nav-item">
+      <a class="nav-link active" routerLink="/home" style="color: rgb(116, 116, 7);" (click)="clear()">HOME</a>
+    </div>
+    <div ngbDropdown class="nav-item dropdown ">
+      <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+        aria-expanded="false" ngbDropdownToggle>CATEGORIES</a>
+      <div ngbDropdownMenu class="dropdown-menu ">
+        <button class="dropdown-item"  (click)="searchMen()">Mens</button>
+        <button class="dropdown-item" (click)="searchWomen()">Womens</button>
+        <button class="dropdown-item" (click)="searchKid()">Kids</button>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" ></a>
+      </div>
+    </div>
+    <div class="nav-item" *ngIf="!(isLoggedIn$ | async) as Loginstatus">
+      <a class="nav-link" *ngIf="Loginstatus" routerLink="/login">LOGIN</a>
+    </div>
+    <div class="nav-item" *ngIf="!(isLoggedIn$ | async) as Loginstatus">
+      <a class="nav-link" *ngIf="Loginstatus" routerLink="/signup">SIGN-UP</a>
+    </div>
+    <div class="navbar-nav nav-right" *ngIf="(isLoggedIn$ | async) as Loginstatus">
+      <div class="nav-item" *ngIf="Loginstatus">
+        <a class="nav-link" routerLink="/cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> CART</a>
+      </div>
+    </div>
+    <div class="navbar-nav nav-right" *ngIf="!(isLoggedIn$ | async) as Loginstatus">
+      <div class="nav-item" *ngIf="Loginstatus">
+        <a class="nav-link" routerLink="/login"><i class="fa fa-shopping-cart" aria-hidden="true"></i> CART</a>
+      </div>
+    </div>
+    <div class="dropdown" *ngIf="(isLoggedIn$ | async) as Loginstatus">
+      <div class="username" *ngIf="Loginstatus">Hi: {{userService.userDisplayName}}</div>
+      <div class="dropdown-content" *ngIf="(isLoggedIn$ | async) as Loginstatus">
+        <a class="nav-link" routerLink="/order" *ngIf="Loginstatus">My Order</a>
+        <a class="nav-link" (click)="logOut()" routerLink="/login" *ngIf="Loginstatus">LOGOUT</a>
+      </div>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,70 @@
+<link rel="stylesheet" href="../home-page/home-page.component.css">
+<div class="container">
+  <div class="row">
+    <div class="col-md-3" *ngFor="let product of dashBoard.list | paginate: { id: 'listing_pagination',
+    itemsPerPage: 4,
+    currentPage: page,
+    totalItems:  dashBoard.list.length}">
+      <div class="card mb-3" *ngIf="product">
+        <img src="{{'data:image/jpg;base64,' + product.image}}" class="card-img-top">
+        <div class="card-body"><span>
+            <h3 class="card-text"><small class="text-muted">{{product.productName}}</small></h3>
+            <p class="card-title">Description:{{product.productDescription}}</p>
+            <p class="card-price">Price : ₹{{product.price}}</p>
+            <form name="myForm">
+              <p class="card-size">Size :</p>
+              <div class="form-check form-check-inline pl-0" novalidate>
+                <input type="radio" class="form-check-input" name="materialExampleRadios" (change)="changeSize($event)"
+                  value="S" required="required" checked />
+                <label class="form-check-label small text-uppercase card-link-secondary" for="small">S</label>
+              </div>
+              <div class="form-check form-check-inline pl-0">
+                <input type="radio" class="form-check-input" name="materialExampleRadios" (change)="changeSize($event)"
+                  value="M" />
+                <label class="form-check-label small text-uppercase card-link-secondary" for="medium">M</label>
+              </div>
+              <div class="form-check form-check-inline pl-0">
+                <input type="radio" class="form-check-input" name="materialExampleRadios" (change)="changeSize($event)"
+                  value="L" />
+                <label class="form-check-label small text-uppercase card-link-secondary" for="large">L</label>
+              </div>
+            </form>
+            <div class="buyNow" *ngIf="!(isLoggedIn$ | async) as Loginstatus">
+              <div class="sub class" *ngIf="Loginstatus">
+                <button type="button" type="submit" class="btn btn-info" (click)="addToCart(product)">Add to
+                  Cart</button>
+                <button type="button" class="btn btn-success" routerLink='/login'>Buy
+                  Now</button>
+              </div>
+            </div>
+            <div class="buyNow" *ngIf="(isLoggedIn$ | async) as Loginstatus">
+              <div class="sub class" *ngIf="Loginstatus">
+                <button type="button" type="submit" class="btn btn-info" (click)="addToCart(product)">Add to
+                  Cart</button>
+                <button type="button" class="btn btn-success" (click)="BuyNow(product)" routerLink='/checkout'>Buy
+                  Now</button>
+              </div>
+            </div>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col text-center">
+  <pagination-controls id="listing_pagination" direction="true" (pageChange)="page = $event">
+  </pagination-controls>
+</div>
+<!-- <nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item disabled">
+      <a class="page-link" href="#" tabindex="-1">Previous</a>
+    </li>
+    <li class="page-item"><a class="page-link" routerLink="/home">1</a></li>
+    <li class="page-item"><a class="page-link" routerLink="/home">2</a></li>
+    <li class="page-item"><a class="page-link" routerLink="/home">3</a></li>
+    <li class="page-item">
+      <a class="page-link" routerLink="/home">Next</a>
+    </li>
+  </ul>
+</nav> -->

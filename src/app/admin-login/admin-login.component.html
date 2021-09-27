@@ -1,0 +1,26 @@
+<link rel="stylesheet" href="../admin-login/admin-login.component.css">
+<img src="../pickawood-gf8e6XvG_3E-unsplash.jpg" class="img">
+<div class="center">
+    <h1>Admin Login</h1>
+    <form method="post" class="col s12 white" #log="ngForm" (ngSubmit)="OnSubmit(log)">
+        <div class="txt_field">
+            <input class="validate" type="text" name="Email" #Email="ngModel" [(ngModel)]="admin.Email" required
+                minlength="3">
+            <span></span>
+            <label>Email</label>
+        </div>
+        <div class="txt_field">
+            <input type="password" class="validate" type="password" name="Password" #Password="ngModel"
+                [(ngModel)]="admin.Password" required minlength="3">
+            <span></span>
+            <label>Password</label>
+        </div>
+        <div *ngIf="errorMessage" style="color: red;">
+            Please enter valid Email or Password
+        </div>
+        <input type="submit" value="Login">
+        <div class="signup_link">
+        </div>
+
+    </form>
+</div>
